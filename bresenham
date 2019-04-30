@@ -1,0 +1,31 @@
+# -*-coding utf-8-*-
+import pygame
+import sys
+import time
+import função
+
+pygame.init()  # inicialização do pygame
+
+window = pygame.display.set_mode((500, 500))  # cria uma janela
+
+pygame.display.set_caption("Teste do bresenham")  # Altera o nome da janela
+controle = 1
+while True:
+
+    for event in pygame.event.get():  # um loop para checar se os eventos estão ocorrendo exemplo mouse,click,teclar
+
+        if event.type == pygame.QUIT:  # quando clica no x da janela ele para o jogo
+            pygame.quit()
+            sys.exit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:  # botao esquerdo do mouse clicado
+                if controle == 1:
+                    x1, y1 = pygame.mouse.get_pos()
+                    controle += 1
+                elif controle == 2:
+                    x2, y2 = pygame.mouse.get_pos()
+                    controle = 1
+                    função.bresenham(window, x1, y1, x2, y2)  # chamada de função que calcula os pixeis a serem plotados
+                    # função.dda(window,x1,y1,x2,y2)#algoritmo dda
+    time.sleep(0.03)
+    pygame.display.update()  # refresh da janela

@@ -1,49 +1,64 @@
-import pygame
-
 white = (255, 255, 255)
 
+def bresenham_completo(screen,x1,y1,x2,y2):
 
-# Esta funcao funciona apenas
-# para o primeiro quadrante
-def bresenham(screen, x1, y1, x2, y2):
-    # carrega no fb o pixel (x1,y1)
-    screen.set_at((x1, y1), white)
-    # computa os deltas necessarios
-    dx = x2 - x1
-    dy = y2 - y1
-    dy2 = 2 * dy
-    dydx2 = dy2 - 2 * dx
-    pant = dy2 - dx
+    if x2 >= x1:
+        dx = (x2-x1)  # estabelecimento do modulo de dx
+        incx = 1  # da esquerda para a direita
+    else:
+        dx = (x1-x2)
+        incx = -1
+
+    if y2 >= y1:
+        dy = (y2-y1)  # modulo de dy
+        incy = 1  # de baixo para cima
+    else:
+        dy = (y1-y2)
+        incy = -1  # de cima para baixo
     x = x1
     y = y1
+    screen.set_at((x1, y1), white)
 
-    for i in range(dx):
-        if pant < 0:
-            screen.set_at((x + 1, y), white)
-            pant = pant + dy2
+    if dx == 0:
+        if incy > 0:
+            for y in range(1, y2):  # Nao tenho ctz
+                screen.set_at((x, y), white)
         else:
-            screen.set_at((x + 1, y + 1), white)
-            pant = pant + dydx2
-            y += 1
-        x += 1
-    pygame.display.flip()
-
-
-def ROUND(n):
-    return int(n+0.5)
-
-
-def dda(screen, x1, y1, x2, y2):
-    x, y = x1, y1
-    length = (x2-x1)
-    if length <= (y2-y1):
-        length = y2 - y1
-    dx = (x2-x1)/float(length)
-    dy = (y2-y1)/float(length)
-    screen.set_at((ROUND(x), ROUND(y)), white)
-
-    for i in range(length):
-        x += dx
-        y += dy
-        screen.set_at((ROUND(x), ROUND(y)), white)
-    pygame.display.flip()
+            y = y2
+            for y in range(1, y1):
+                screen.set_at((x, y), white)
+    elif dy == 0:
+        if incx > 0:
+            for x in range(1, x2):
+                screen.set_at((x, y), white)
+        else:
+            x = x2
+            for x in range(1, x1):
+                screen.set_at((x, y), white)
+    else:
+        if dx >= dy:
+            d = (2*dy-dx)
+            incE = 2*dy
+            incNE = 2*(dy-dx)
+            while x != x2:
+                if d <= 0:
+                    d = d+incE
+                    x = x+incx
+                else:
+                    d = d+incNE
+                    x = x+incx
+                    y = y+incy
+                screen.set_at((x, y), white)
+        else:
+            d = (2*dx-dy)
+            incE = 2*dx
+            incNE = 2*(dx-dy)
+            while y != y2:
+                if d <= 0:
+                    d = d+incE
+                    y = y+incy
+                else:
+                    d = d+incNE
+                    y = y+incy
+                    x = x+incx
+                screen.set_at((x, y), white)

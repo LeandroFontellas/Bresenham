@@ -1,6 +1,6 @@
 # -*-coding utf-8-*-
-import pygame
 import sys
+import pygame
 import time
 import função
 
@@ -25,7 +25,6 @@ while True:
                 elif controle == 2:
                     x2, y2 = pygame.mouse.get_pos()
                     controle = 1
-                    função.bresenham(window, x1, y1, x2, y2)  # chamada de função que calcula os pixeis a serem plotados
-                    # função.dda(window,x1,y1,x2,y2)#algoritmo dda
+                    função.bresenham_completo(window,x1,y1,x2,y2)
     time.sleep(0.03)
     pygame.display.update()  # refresh da janela

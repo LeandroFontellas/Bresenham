@@ -1,6 +1,7 @@
 white = (255, 255, 255)
 
-def bresenham_completo(screen,x1,y1,x2,y2):
+
+def bresenham_completo(screen, x1, y1, x2, y2):
 
     if x2 >= x1:
         dx = (x2-x1)  # estabelecimento do modulo de dx
@@ -21,19 +22,17 @@ def bresenham_completo(screen,x1,y1,x2,y2):
 
     if dx == 0:
         if incy > 0:
-            for y in range(1, y2):  # Nao tenho ctz
+            for y in range(y, y2):  # Nao tenho ctz
                 screen.set_at((x, y), white)
         else:
-            y = y2
-            for y in range(1, y1):
+            for y in range(y2, y1):
                 screen.set_at((x, y), white)
     elif dy == 0:
         if incx > 0:
-            for x in range(1, x2):
+            for x in range(x, x2):
                 screen.set_at((x, y), white)
         else:
-            x = x2
-            for x in range(1, x1):
+            for x in range(x2, x1):
                 screen.set_at((x, y), white)
     else:
         if dx >= dy:

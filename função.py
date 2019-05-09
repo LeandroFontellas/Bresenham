@@ -22,14 +22,14 @@ def bresenham_completo(screen, x1, y1, x2, y2):
 
     if dx == 0:
         if incy > 0:
-            for y in range(y, y2):  # Nao tenho ctz
+            for y in range(y1, y2):  # Nao tenho ctz
                 screen.set_at((x, y), white)
         else:
             for y in range(y2, y1):
                 screen.set_at((x, y), white)
     elif dy == 0:
         if incx > 0:
-            for x in range(x, x2):
+            for x in range(x1, x2):
                 screen.set_at((x, y), white)
         else:
             for x in range(x2, x1):

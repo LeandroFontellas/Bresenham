@@ -188,7 +188,7 @@ while True:
                         continue
                     if controle==2:
                         controle=1
-                        circulo(window,p1[0],p1[1],p2[0],p2[1],black)
+                        circulo2(window,p1[0],p1[1],p2[0],p2[1],black)
                         primitiva=0
                         continue
 

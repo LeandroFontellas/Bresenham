@@ -72,7 +72,72 @@ def circulo(overlay, x0, y0, x1,y1, color):
         overlay.set_at((x + x0, y0 - y), color)
         overlay.set_at((y + x0, y0 - x), color)
         overlay.set_at((y + x0, x + y0), color)
-    pygame.display.flip()
+
+#circulo com restrição
+def circulo2(overlay, x0, y0, x1,y1, color):
+    if y0 == y1:
+            if x0 == x1:
+                r=0
+            if x0 > x1:
+                r = x0 - x1
+            else:
+                r = x1 - x0
+    elif x0 == x1:
+        if x0 > x1:
+            r = y0 - y1
+        else:
+            r = y1 - y0
+    else:
+        if y1 > y0 and x1 > x0:
+            r = int(math.sqrt(((y1 - y0) * (y1 - y0)) + ((x1 - x0) * (x1 - x0))))
+        elif y1 > y0 and x1 < x0:
+            r = int(math.sqrt(((y1 - y0) * (y1 - y0)) + ((x0 - x1) * (x0 - x1))))
+        elif y1 < y0 and x1 > x0:
+            r = int(math.sqrt(((y0 - y1) * (y0 - y1)) + ((x0 - x1) * (x0 - x1))))
+        else:
+            r = int(math.sqrt(((y0 - y1) * (y0 - y1)) + ((x1 - x0) * (x1 - x0))))
+    x = 0
+    y = r
+    d = 1 - r
+    if (x+x0)>50 and (y+y0)>50 and (x+x0)<800 and (y+y0)<600:
+        overlay.set_at((x + x0, y + y0), color)
+    if (x0-y)>50 and (x+y0)>50 and (x0-y)<800 and (x+y0)<600:
+        overlay.set_at((x0 - y, x + y0), color)
+    if (x0-y)>50 and (y0-x)>50 and (x0-y)<800 and (y0-x)<600:
+        overlay.set_at((x0 - y, y0 - x), color)
+    if (x0 -x)>50 and (y0-y)>50 and (x0 - x)<800 and (y0-y)<600:
+        overlay.set_at((x0 - x, y0 - y), color)
+    if (x0-x)>50 and (y+y0)>50 and (x0-x)<800 and (y0+y)<600:
+        overlay.set_at((x0 - x, y + y0), color)
+    if (x+x0)>50 and (y0-y)>50 and (x+x0)<800 and (y0-y)<600:
+        overlay.set_at((x + x0, y0 - y), color)
+    if (y+x0)>50 and (y0 -x)>50 and (y+x0)<800 and (y0-x):
+        overlay.set_at((y + x0, y0 - x), color)
+    if (y+x0)>50 and (x+y0)>50 and (y+x0)<800 and (x+y0):
+        overlay.set_at((y + x0, x + y0), color)
+    while y > x:
+        if d < 0:
+            d = d + (2 * x) + 3
+        else:
+            d = d + 2 * (x - y) + 5
+            y = y - 1
+        x = x + 1
+        if (x + x0) > 50 and (y + y0) > 50 and (x + x0) < 800 and (y + y0) < 600:
+            overlay.set_at((x + x0, y + y0), color)
+        if (x0 - y) > 50 and (x + y0) > 50 and (x0 - y) < 800 and (x + y0) < 600:
+            overlay.set_at((x0 - y, x + y0), color)
+        if (x0 - y) > 50 and (y0 - x)>50 and (x0 - y) < 800 and (y0 - x) < 600:
+            overlay.set_at((x0 - y, y0 - x), color)
+        if (x0 - x) > 50 and (y0 - y) > 50 and (x0 - x) < 800 and (y0 - y) < 600:
+            overlay.set_at((x0 - x, y0 - y), color)
+        if (x0 - x) > 50 and (y + y0) > 50 and (x0 - x) < 800 and (y0 + y) < 600:
+            overlay.set_at((x0 - x, y + y0), color)
+        if (x + x0) > 50 and (y0 - y) > 50 and (x + x0) < 800 and (y0 - y) < 600:
+            overlay.set_at((x + x0, y0 - y), color)
+        if (y + x0) > 50 and (y0 - x) > 50 and (y + x0) < 800 and (y0 - x):
+            overlay.set_at((y + x0, y0 - x), color)
+        if (y + x0) > 50 and (x + y0) > 50 and (y + x0) < 800 and (x + y0):
+            overlay.set_at((y + x0, x + y0), color)
 
 
 #bresenham sem restrição
@@ -202,8 +267,8 @@ def bresenham(screen, x1, y1, x2, y2, color):
                     d = d + incNE
                     y = y + incy
                     x = x + incx
-            if x >= 50 and y >= 50 and x <= 800 and y <= 600:  # garantir que esteja dentro da area de desenho
-                screen.set_at((x, y), color)
+                if x >= 50 and y >= 50 and x <= 800 and y <= 600:  # garantir que esteja dentro da area de desenho
+                    screen.set_at((x, y), color)
 
 
 #quadrado sem restrição

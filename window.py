@@ -1,8 +1,5 @@
-import pygame
-import sys
-import math
 from primitives import *
-import time
+
 
 screen_size = (800, 600)
 
@@ -89,7 +86,6 @@ bresenham2(window,20,280,30,260,black)
 bresenham2(window,30,260,40,280,black)
 
 CorAtual = black
-global primitiva
 primitiva=0
 controle=1#controle
 while True:
@@ -191,10 +187,4 @@ while True:
                         circulo2(window,p1[0],p1[1],p2[0],p2[1],black)
                         primitiva=0
                         continue
-
-
-
-
-
-
     pygame.display.update()

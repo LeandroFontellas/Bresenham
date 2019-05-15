@@ -3,6 +3,29 @@ from primitives import *
 
 screen_size = (800, 600)
 
+def flood_Fill(surface, x, y, newColor):
+    pilha = [(x, y)]
+    corOriginal = surface.get_at((x, y))  # cor de fundo original
+
+    while len(pilha) > 0:
+        x, y = pilha.pop()
+
+        #        if((x < 0 or x>900) or (y<100 or y>600)):
+        #            continue
+        if surface.get_at((x, y)) != corOriginal:
+            continue
+        print("(", x, ",", y, ")")
+        surface.set_at((x, y), newColor)
+        # pygame.display.update()
+        if ((x + 1) <= 899):
+            pilha.append((x + 1, y))  # poe o pixel da direita na pilha para ser preenchido
+        if ((x - 1) >= 0):
+            pilha.append((x - 1, y))  # poe o pixel da esquerda na pilha para ser preenchido
+        if ((y + 1) <= 599):
+            pilha.append((x, y + 1))  # poe o pixel de baixo na pilha para ser preenchido
+        if ((y - 1) >= 100):
+            pilha.append((x, y - 1)) # poe o pixel de cima na pilha para ser preenchido
+
 # Variaveis de estilo
 background = white
 foreground = black
@@ -116,6 +139,9 @@ while True:
                     if p1[0]>0 and p1[1]>300 and p1[0]<50 and p1[1]<350:
                         primitiva=6#circulo
                         continue
+                    if p1[0]>0 and p1[1]>0 and p1[0]<50 and p1[1]<50:
+                        primitiva=7#preencher com vermelho
+                        continue
                 if primitiva == 1:#linha
                     if controle ==1:
                         p2=pygame.mouse.get_pos()
@@ -185,6 +211,11 @@ while True:
                     if controle==2:
                         controle=1
                         circulo2(window,p1[0],p1[1],p2[0],p2[1],black)
+                        primitiva=0
+                        continue
+                if primitiva==7:#preenche vermelho
+                        p2=pygame.mouse.get_pos()
+                        flood_Fill(window,p2[0],p2[1],red)
                         primitiva=0
                         continue
     pygame.display.update()

@@ -24,7 +24,28 @@ def retangulo2(window, p1, p2,color):
 
 
 #circulo sem restrição
-def circulo(overlay, x0, y0, r, color):
+def circulo(overlay, x0, y0, x1,y1, color):
+    if y0 == y1:
+            if x0 == x1:
+                r=0
+            if x0 > x1:
+                r = x0 - x1
+            else:
+                r = x1 - x0
+    elif x0 == x1:
+        if x0 > x1:
+            r = y0 - y1
+        else:
+            r = y1 - y0
+    else:
+        if y1 > y0 and x1 > x0:
+            r = int(math.sqrt(((y1 - y0) * (y1 - y0)) + ((x1 - x0) * (x1 - x0))))
+        elif y1 > y0 and x1 < x0:
+            r = int(math.sqrt(((y1 - y0) * (y1 - y0)) + ((x0 - x1) * (x0 - x1))))
+        elif y1 < y0 and x1 > x0:
+            r = int(math.sqrt(((y0 - y1) * (y0 - y1)) + ((x0 - x1) * (x0 - x1))))
+        else:
+            r = int(math.sqrt(((y0 - y1) * (y0 - y1)) + ((x1 - x0) * (x1 - x0))))
     x = 0
     y = r
     d = 1 - r
@@ -327,3 +348,4 @@ def bezier2(window, p1, p2, p3, color):
         if x>50 and y>50 and y<800 and x<600:
             window.set_at((x, y), color)
     pygame.display.flip()
+

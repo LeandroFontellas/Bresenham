@@ -73,7 +73,7 @@ quadrado(window, 50, 50, 150, 200, black)
 quadrado(window, 10, 40, 160, 180, black)
 # círculo
 quadrado(window, 50, 50, 200, 250, black)
-circulo(window,24,325,17,black)
+circulo(window,24,325,40,325,black)
 # polilinha
 quadrado(window, 50, 50, 300, 350, black)
 bresenham2(window, 10, 260, 20, 280, black)
@@ -89,9 +89,9 @@ bresenham2(window,20,280,30,260,black)
 bresenham2(window,30,260,40,280,black)
 
 CorAtual = black
+global primitiva
 primitiva=0
 controle=1#controle
-controle2=0
 while True:
     for event in pygame.event.get():
 
@@ -181,7 +181,17 @@ while True:
                         if p2[0]>0 and p2[1]>50 and p2[0]<50 and p2[1]<600:
                             primitiva=0
                         continue
-                #if primitiva=6:#circulo
+                if primitiva==6:#circulo
+                    if controle==1:
+                        p2=pygame.mouse.get_pos()
+                        controle+=1
+                        continue
+                    if controle==2:
+                        controle=1
+                        circulo(window,p1[0],p1[1],p2[0],p2[1],black)
+                        primitiva=0
+                        continue
+
 
 
 
